@@ -1,0 +1,30 @@
+import numpy as np
+import matplotlib.pyplot as plt
+
+Q1 = np.array([1, 0])
+Q2 = np.array([0, 1])
+
+psi = Q1
+
+H = (1 / np.sqrt(2)) * np.array([[1, 1], [1, -1]])
+
+psi = H @ psi 
+
+def measure(state):
+  probabilities = np.abs(state)**2
+  outcome = np.random.choice([0, 1], p=probabilities)
+  return outcome
+
+shots = 1000
+results = []
+
+for _ in range(shots):
+    results.append(measure(psi))
+
+counts = [results.count(0), results.count(1)]
+
+plt.bar(['0', '1'], counts)
+plt.xlabel('Measurement Outcome')
+plt.ylabel('Counts')
+plt.title('Quantum Measurement Results')
+plt.show()
