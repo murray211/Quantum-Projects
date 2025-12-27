@@ -22,6 +22,7 @@ for _ in range(shots):
     results.append(measure(psi))
 
 counts = [results.count(0), results.count(1)]
+print(counts)
 
 plt.bar(['0', '1'], counts)
 plt.xlabel('Measurement Outcome')
