@@ -1,0 +1,25 @@
+import numpy as np
+import matplotlib.pyplot as plt
+
+H =  (1/np.sqrt(2)) * np.array([[1,  1],[1, -1]])
+I = np.eye(2)
+H0 = np.kron(I, H)
+H1 = np.kron(H, I)
+
+psi = H0 @ psi
+
+probs = np.abs(psi)**2
+
+states = ["00", "01", "10", "11"]
+
+results = []
+
+for _ in range(1000):
+  outcome = np.random.choice(states, p=probs)
+  results.append(outcome)
+
+plt.hist(results, bins=4)
+plt.xlabel("Measurement Outcome")
+plt.ylabel("Counts")
+plt.title("Quantum Measurement Results")
+plt.show()
